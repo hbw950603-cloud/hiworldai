@@ -32,7 +32,27 @@
   </url>
   <url>
     <loc>https://hiworldai.com/tutorials/midjourney-for-beginners.html</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-11</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hiworldai.com/tutorials/notion-ai-complete-guide.html</loc>
+    <lastmod>2026-04-11</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hiworldai.com/tutorials/grammarly-ai-writing-assistant.html</loc>
+    <lastmod>2026-04-11</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hiworldai.com/tutorials/jasper-ai-marketing-copy.html</loc>
+    <lastmod>2026-04-11</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hiworldai.com/tutorials/runway-ml-video-generation.html</loc>
+    <lastmod>2026-04-11</lastmod>
     <priority>0.8</priority>
   </url>
 </urlset>

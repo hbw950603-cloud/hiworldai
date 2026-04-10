@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Runway ML 视频生成完全指南 | AI 工具指南</title>
+    <meta name="description" content="Runway ML 完整教程：AI 视频生成/绿幕抠图/运动追踪/视频修复。零基础制作专业视频，创作者必备！">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JRCSBY0SLM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JRCSBY0SLM');
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
+        header { background: linear-gradient(135deg, #000000 0%, #ff6b6b 100%); color: white; padding: 40px 20px; text-align: center; margin: -20px -20px 30px -20px; }
+        h1 { font-size: 2em; margin-bottom: 10px; }
+        .meta { color: rgba(255,255,255,0.8); font-size: 0.9em; }
+        h2 { color: #ff6b6b; margin: 30px 0 15px 0; border-bottom: 2px solid #ff6b6b; padding-bottom: 10px; }
+        h3 { color: #ff8e8e; margin: 25px 0 10px 0; }
+        p { margin: 15px 0; }
+        ul, ol { margin: 15px 0 15px 30px; }
+        li { margin: 8px 0; }
+        .tip { background: #ffe5e5; border-left: 4px solid #ff6b6b; padding: 15px 20px; margin: 20px 0; }
+        .warning { background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px 20px; margin: 20px 0; }
+        .code { background: #f8f9fa; border: 1px solid #e9ecef; padding: 15px; border-radius: 5px; font-family: 'Courier New', monospace; overflow-x: auto; margin: 15px 0; }
+        .back { display: inline-block; margin-top: 30px; color: #ff6b6b; text-decoration: none; }
+        @media (max-width: 768px) { body { padding: 15px; } header { padding: 30px 15px; } h1 { font-size: 1.5em; } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🎬 Runway ML 视频生成</h1>
+        <p class="meta">更新时间：2026 年 4 月 | 阅读时间：12 分钟</p>
+    </header>
+    
+    <p>Runway 是一款基于 AI 的视频编辑和生成工具，让你用文字描述就能创建视频，或自动完成复杂的视频编辑任务。本教程将带你从零开始掌握 Runway 的所有功能。</p>
+    
+    <h2>一、Runway 是什么？</h2>
+    
+    <p>Runway（原 Runway ML）是一款 AI 视频创作平台，提供文生视频、图生视频、视频编辑等 30+ AI 工具。</p>
+    
+    <h3>核心功能</h3>
+    <ul>
+        <li>🎥 <strong>文生视频</strong> - 用文字描述生成视频</li>
+        <li>🖼️ <strong>图生视频</strong> - 将图片转换为动态视频</li>
+        <li>✂️ <strong>智能剪辑</strong> - AI 辅助视频编辑</li>
+        <li>🎭 <strong>绿幕抠图</strong> - 自动移除背景</li>
+        <li>🎯 <strong>运动追踪</strong> - 自动跟踪物体运动</li>
+        <li>✨ <strong>视频修复</strong> - 去除水印和杂物</li>
+        <li>🎨 <strong>风格转换</strong> - 改变视频艺术风格</li>
+        <li>📹 <strong>慢动作</strong> - AI 生成流畅慢动作</li>
+    </ul>
+    
+    <h2>二、注册与入门</h2>
+    
+    <h3>步骤 1：创建账号</h3>
+    <div class="code">
+1. 访问 https://runwayml.com
+2. 点击 "Sign Up Free"
+3. 使用 Google 账号或邮箱注册
+4. 完成基础设置
+5. 获得免费额度（125 积分）
+    </div>
+    
+    <h3>步骤 2：了解界面</h3>
+    <p>Runway 主界面分为三个区域：</p>
+    <ul>
+        <li><strong>左侧工具栏</strong> - 选择 AI 工具</li>
+        <li><strong>中间工作区</strong> - 预览和编辑</li>
+        <li><strong>右侧参数面板</strong> - 调整设置</li>
+    </ul>
+    
+    <div class="tip">
+<strong>💡 提示：</strong> 新用户建议先试用 "Gen-2" 文生视频功能，最直观易上手。
+    </div>
+    
+    <h2>三、定价计划</h2>
+    
+    <h3>Free（免费）</h3>
+    <ul>
+        <li>✅ 125 积分/月（约 25 秒视频）</li>
+        <li>✅ 基础 AI 工具</li>
+        <li>❌ 有水印</li>
+        <li>❌ 不可商用</li>
+    </ul>
+    
+    <h3>Standard（$15/月）</h3>
+    <ul>
+        <li>✅ 625 积分/月</li>
+        <li>✅ 无水印</li>
+        <li>✅ 可商用</li>
+        <li>✅ 优先渲染</li>
+    </ul>
+    
+    <h3>Pro（$35/月）</h3>
+    <ul>
+        <li>✅ 2250 积分/月</li>
+        <li>✅ 4K 导出</li>
+        <li>✅ 团队协作</li>
+        <li>✅ 高级工具</li>
+    </ul>
+    
+    <h3>Unlimited（$76/月）</h3>
+    <ul>
+        <li>✅ 无限积分</li>
+        <li>✅ 最高优先级</li>
+        <li>✅ 专属支持</li>
+    </ul>
+    
+    <div class="warning">
+<strong>⚠️ 注意：</strong> 1 秒视频约消耗 5 积分。免费额度适合体验，正式使用建议升级。
+    </div>
+    
+    <h2>四、核心功能使用指南</h2>
+    
+    <h3>1. 文生视频（Gen-2）</h3>
+    
+    <p>用文字描述生成视频：</p>
+    <div class="code">
+1. 选择 "Gen-2: Text to Video"
+2. 输入详细的文字描述：
+   "A cinematic shot of a sunset over 
+   the ocean, golden hour, 4K"
+3. 选择视频风格（可选）
+4. 点击 "Generate"
+5. 等待 1-2 分钟生成
+6. 预览并下载
+    </div>
+    
+    <h3>2. 图生视频</h3>
+    
+    <p>将静态图片转换为动态视频：</p>
+    <div class="code">
+1. 选择 "Gen-2: Image to Video"
+2. 上传图片（支持 JPG/PNG）
+3. 输入运动描述（可选）：
+   "Camera slowly zoom in"
+4. 点击 "Generate"
+5. 等待生成并下载
+    </div>
+    
+    <div class="tip">
+<strong>💡 提示：</strong> 图片越清晰，生成效果越好。建议 1080p 以上分辨率。
+    </div>
+    
+    <h3>3. 绿幕抠图（Green Screen）</h3>
+    
+    <p>自动移除视频背景：</p>
+    <div class="code">
+1. 选择 "Green Screen" 工具
+2. 上传视频
+3. 用吸管工具选择要移除的颜色
+4. 调整容差和边缘平滑
+5. 点击 "Export" 导出
+    </div>
+    
+    <h3>4. 运动追踪（Motion Tracking）</h3>
+    
+    <p>自动跟踪视频中的物体：</p>
+    <div class="code">
+1. 选择 "Motion Tracking"
+2. 上传视频
+3. 选择要跟踪的物体
+4. 设置跟踪点
+5. 添加要跟随的文本或图形
+6. 导出视频
+    </div>
+    
+    <h3>5. 视频修复（Inpainting）</h3>
+    
+    <p>去除视频中不需要的物体：</p>
+    <div class="code">
+1. 选择 "Inpainting"
+2. 上传视频
+3. 用画笔涂抹要移除的物体
+4. AI 自动填充背景
+5. 预览并导出
+    </div>
+    
+    <h3>6. 慢动作（Slow Motion）</h3>
+    
+    <p>AI 生成流畅的慢动作视频：</p>
+    <div class="code">
+1. 选择 "Slow Motion"
+2. 上传视频
+3. 选择慢放倍数（2x/4x/8x）
+4. AI 插帧生成流畅慢动作
+5. 导出视频
+    </div>
+    
+    <h2>五、提示词技巧</h2>
+    
+    <h3>好的提示词示例</h3>
+    <div class="code">
+❌ 差：一个女孩在跑步
+
+✅ 好：电影镜头，年轻女性在公园晨跑，
+金色阳光透过树叶，慢动作，
+浅景深，4K，专业摄影
+    </div>
+    
+    <h3>提示词公式</h3>
+    <div class="code">
+[镜头类型] + [主体] + [动作] + [环境] + 
+[光线] + [风格] + [技术参数]
+    </div>
+    
+    <h3>常用镜头术语</h3>
+    <ul>
+        <li>Cinematic shot - 电影镜头</li>
+        <li>Close-up - 特写</li>
+        <li>Wide angle - 广角</li>
+        <li>Drone view - 无人机视角</li>
+        <li>Time lapse - 延时摄影</li>
+    </ul>
+    
+    <div class="tip">
+<strong>💡 提示：</strong> 英文提示词效果最佳，可以使用翻译工具辅助。
+    </div>
+    
+    <h2>六、实际应用场景</h2>
+    
+    <h3>场景 1：社交媒体视频</h3>
+    <div class="code">
+1. 用 Gen-2 生成开场视频
+2. 使用品牌配色和风格
+3. 添加文字说明
+4. 导出为竖屏 9:16 格式
+5. 发布到 TikTok/Instagram
+    </div>
+    
+    <h3>场景 2：产品展示</h3>
+    <div class="code">
+1. 拍摄产品照片
+2. 用图生视频创建动态展示
+3. 添加转场效果
+4. 配上背景音乐
+5. 用于电商页面
+    </div>
+    
+    <h3>场景 3：内容创作</h3>
+    <div class="code">
+1. 用文生视频创建 B-roll
+2. 与真人出镜结合
+3. 用绿幕抠图换背景
+4. 添加动态文字
+5. 发布到 YouTube
+    </div>
+    
+    <h2>七、常见问题</h2>
+    
+    <h3>Q1: 生成视频有多长？</h3>
+    <p>Gen-2 默认生成 4 秒视频，可延长至 16 秒。</p>
+    
+    <h3>Q2: 可以商用吗？</h3>
+    <p>付费计划可以商用，免费计划不可商用。</p>
+    
+    <h3>Q3: 支持中文提示词吗？</h3>
+    <p>支持，但英文提示词效果更好。</p>
+    
+    <h3>Q4: 导出格式是什么？</h3>
+    <p>MP4 格式，最高支持 4K 分辨率（Pro 版）。</p>
+    
+    <h2>八、替代方案</h2>
+    
+    <ul>
+        <li><strong>Pika Labs</strong> - 免费文生视频</li>
+        <li><strong>Stable Video Diffusion</strong> - 开源方案</li>
+        <li><strong>Luma Dream Machine</strong> - 高质量生成</li>
+        <li><strong>Kaiber</strong> - 艺术风格转换</li>
+    </ul>
+    
+    <div class="tip">
+<strong>💡 总结：</strong> Runway 是最全面的 AI 视频工具，适合内容创作者、营销人员和视频编辑。免费额度足够体验核心功能。
+    </div>
+    
+    <a href="../index.html" class="back">← 返回首页</a>
+</body>
+</html>
