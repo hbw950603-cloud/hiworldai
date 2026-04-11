@@ -3,7 +3,8 @@
     { "source": "/tutorials/:path*", "destination": "/tutorials/:path*.html" },
     { "source": "/blog/:path*", "destination": "/blog/:path*.html" },
     { "source": "/tools/:path*", "destination": "/tools/:path*.html" },
-    { "source": "/tools", "destination": "/tools/index.html" }
+    { "source": "/tools", "destination": "/tools/index.html" },
+    { "source": "/tools/image-resizer", "destination": "/tools/image-resizer.html" }
   ],
   "headers": [
     {
