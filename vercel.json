@@ -4,7 +4,8 @@
     { "source": "/blog/:path*", "destination": "/blog/:path*.html" },
     { "source": "/tools/:path*", "destination": "/tools/:path*.html" },
     { "source": "/tools", "destination": "/tools/index.html" },
-    { "source": "/tools/image-resizer", "destination": "/tools/image-resizer.html" }
+    { "source": "/tools/image-resizer", "destination": "/tools/image-resizer.html" },
+    { "source": "/tools/pdf-compressor", "destination": "/tools/pdf-compressor.html" }
   ],
   "headers": [
     {
