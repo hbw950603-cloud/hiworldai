@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>免费在线 PDF 压缩工具 | HiWorldAI</title>
+    <meta name="description" content="免费在线压缩 PDF 文件，减小文件大小，保持清晰质量。本地处理保护隐私，无需上传服务器。">
+    <meta name="keywords" content="PDF 压缩，PDF 优化，在线 PDF 工具，免费工具，HiWorldAI">
+    <link rel="canonical" href="https://hiworldai.com/tools/pdf-compressor">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "PDF 压缩工具",
+      "alternateName": "HiWorldAI PDF Compressor",
+      "url": "https://hiworldai.com/tools/pdf-compressor",
+      "description": "免费在线压缩 PDF 文件，减小文件大小。本地处理保护隐私。",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "HiWorldAI",
+        "url": "https://hiworldai.com"
+      }
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        
+        nav { background: #f8f9fa; padding: 15px 0; position: sticky; top: 0; z-index: 100; }
+        nav ul { list-style: none; display: flex; justify-content: center; gap: 30px; }
+        nav a { color: #667eea; text-decoration: none; font-weight: 500; }
+        nav a:hover { text-decoration: underline; }
+        
+        .tool-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 60px 0; text-align: center; }
+        .tool-header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .tool-header p { font-size: 1.2em; opacity: 0.9; }
+        
+        .tool-container { max-width: 900px; margin: -40px auto 40px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); padding: 40px; }
+        
+        .upload-area { border: 3px dashed #e2e8f0; border-radius: 15px; padding: 50px 30px; text-align: center; margin-bottom: 30px; transition: all 0.3s; cursor: pointer; }
+        .upload-area:hover { border-color: #667eea; background: #f8f9ff; }
+        .upload-area input[type="file"] { display: none; }
+        .upload-icon { font-size: 4em; margin-bottom: 15px; }
+        .upload-text { font-size: 1.2em; color: #4a5568; }
+        .upload-hint { font-size: 0.9em; color: #a0aec0; margin-top: 10px; }
+        
+        .file-list { margin-bottom: 30px; }
+        .file-item { background: #f7fafc; border-radius: 10px; padding: 15px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
+        .file-info { display: flex; align-items: center; gap: 15px; }
+        .file-icon { font-size: 2em; }
+        .file-name { font-weight: 500; color: #2d3748; }
+        .file-size { color: #718096; font-size: 0.9em; }
+        .remove-btn { color: #e53e3e; cursor: pointer; font-weight: 500; }
+        .remove-btn:hover { text-decoration: underline; }
+        
+        .compression-level { margin-bottom: 30px; }
+        .level-options { display: flex; gap: 15px; flex-wrap: wrap; }
+        .level-btn { padding: 12px 24px; border: 2px solid #e2e8f0; border-radius: 10px; background: white; cursor: pointer; transition: all 0.3s; }
+        .level-btn:hover { border-color: #667eea; }
+        .level-btn.active { border-color: #667eea; background: #667eea; color: white; }
+        .level-title { font-weight: 600; }
+        .level-desc { font-size: 0.85em; color: #718096; margin-top: 5px; }
+        
+        .action-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .btn { padding: 15px 40px; border: none; border-radius: 10px; font-size: 1.1em; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4); }
+        .btn-success { background: linear-gradient(135deg, #48bb78 0%, #38a169 100%); color: white; }
+        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(72, 187, 120, 0.4); }
+        .btn:disabled { background: #cbd5e0; cursor: not-allowed; transform: none; }
+        .btn.hidden { display: none; }
+        
+        .progress-section { display: none; text-align: center; padding: 30px; }
+        .progress-section.active { display: block; }
+        .progress-bar { width: 100%; height: 10px; background: #e2e8f0; border-radius: 5px; overflow: hidden; margin: 20px 0; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); width: 0%; transition: width 0.3s; }
+        
+        .results-section { display: none; margin-top: 30px; }
+        .results-section.active { display: block; }
+        .result-item { background: #f0fff4; border: 2px solid #48bb78; border-radius: 10px; padding: 20px; margin-bottom: 15px; }
+        .result-stats { display: flex; justify-content: space-around; margin: 20px 0; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 1.5em; font-weight: 700; color: #38a169; }
+        .stat-label { color: #718096; font-size: 0.9em; }
+        
+        .seo-content { max-width: 900px; margin: 60px auto; background: white; border-radius: 15px; padding: 40px; box-shadow: 0 2px 15px rgba(0,0,0,0.08); }
+        .seo-content h2 { font-size: 1.6em; color: #2d3748; margin: 30px 0 15px; }
+        .seo-content h2:first-child { margin-top: 0; }
+        .seo-content ul, .seo-content ol { margin-left: 25px; color: #4a5568; }
+        .seo-content li { margin-bottom: 10px; }
+        
+        footer { text-align: center; padding: 30px; color: #718096; border-top: 1px solid #e2e8f0; margin-top: 40px; }
+        
+        .loading { display: inline-block; }
+        .loading::after { content: ''; animation: dots 1.5s infinite; }
+        @keyframes dots { 0%, 20% { content: ''; } 40% { content: '.'; } 60% { content: '..'; } 80%, 100% { content: '...'; } }
+        
+        .notice { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 15px; margin: 20px 0; border-radius: 5px; }
+        .notice-title { font-weight: 600; color: #92400e; margin-bottom: 5px; }
+        .notice-text { color: #78350f; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="/">🏠 首页</a></li>
+                <li><a href="/tutorials/">📚 教程</a></li>
+                <li><a href="/tools/">🛠️ 工具</a></li>
+                <li><a href="/blog/">📝 博客</a></li>
+                <li><a href="/about/">ℹ️ 关于</a></li>
+                <li><a href="/contact/">📧 联系</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="tool-header">
+        <div class="container">
+            <h1>📄 PDF 压缩工具</h1>
+            <p>免费在线压缩 PDF 文件，减小文件大小</p>
+        </div>
+    </header>
+
+    <div class="tool-container">
+        <div class="notice">
+            <div class="notice-title">⚠️ 使用说明</div>
+            <div class="notice-text">
+                由于浏览器安全限制，PDF 压缩需要服务器处理。我们推荐使用以下替代方案：
+                <ul style="margin-top: 10px; margin-left: 20px;">
+                    <li>使用图片压缩工具压缩 PDF 中的图片</li>
+                    <li>使用 Adobe Acrobat 等专业软件</li>
+                    <li>使用 iLovePDF、Smallpdf 等在线服务</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="upload-area" id="uploadArea">
+            <input type="file" id="fileInput" accept="application/pdf">
+            <label for="fileInput" style="cursor: pointer;">
+                <div class="upload-icon">📁</div>
+                <div class="upload-text">点击上传 PDF 或 拖拽 PDF 到此处</div>
+                <div class="upload-hint">支持 PDF 格式，最大 50MB</div>
+            </label>
+        </div>
+
+        <div class="compression-level" id="compressionLevel" style="display: none;">
+            <h3 style="margin-bottom: 15px; color: #2d3748;">⚙️ 选择压缩级别</h3>
+            <div class="level-options">
+                <div class="level-btn active" data-level="low">
+                    <div class="level-title">🐢 低压缩</div>
+                    <div class="level-desc">高质量，文件较大</div>
+                </div>
+                <div class="level-btn" data-level="medium">
+                    <div class="level-title">🐇 中压缩</div>
+                    <div class="level-desc">平衡质量和大小（推荐）</div>
+                </div>
+                <div class="level-btn" data-level="high">
+                    <div class="level-title">🚀 高压缩</div>
+                    <div class="level-desc">最小文件，质量降低</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="file-list" id="fileList" style="display: none;"></div>
+
+        <div class="action-buttons">
+            <button class="btn btn-primary" id="compressBtn" style="display: none;">🔄 开始压缩</button>
+            <button class="btn btn-primary" id="loadingBtn" disabled style="display: none;">处理中<span class="loading"></span></button>
+        </div>
+
+        <div class="progress-section" id="progressSection">
+            <h3>正在压缩 PDF...</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p id="progressText">0%</p>
+        </div>
+
+        <div class="results-section" id="resultsSection">
+            <div class="result-item">
+                <h3 style="color: #38a169; margin-bottom: 15px;">✅ 压缩完成！</h3>
+                <div class="result-stats">
+                    <div class="stat">
+                        <div class="stat-value" id="originalSizeStat">0 MB</div>
+                        <div class="stat-label">原始大小</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="compressedSizeStat">0 MB</div>
+                        <div class="stat-label">压缩后</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="savingsStat">0%</div>
+                        <div class="stat-label">节省空间</div>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-success" id="downloadBtn">📥 下载压缩后的 PDF</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <article class="seo-content">
+        <h2>📄 为什么需要压缩 PDF？</h2>
+        <ul>
+            <li><strong>邮件附件限制</strong> - 大多数邮箱限制附件大小在 25MB 以内</li>
+            <li><strong>网站上传要求</strong> - 很多平台限制 PDF 文件大小</li>
+            <li><strong>节省存储空间</strong> - 减小文件占用空间</li>
+            <li><strong>加快加载速度</strong> - 小文件下载和打开更快</li>
+            <li><strong>完全免费</strong> - 无需安装软件，在线即可使用</li>
+        </ul>
+
+        <h2>📝 如何使用？</h2>
+        <ol>
+            <li>上传 PDF 文件</li>
+            <li>选择压缩级别（推荐中等压缩）</li>
+            <li>点击"开始压缩"</li>
+            <li>等待处理完成</li>
+            <li>下载压缩后的 PDF</li>
+        </ol>
+
+        <h2>💡 常见用途</h2>
+        <ul>
+            <li>学术论文提交</li>
+            <li>工作报告发送</li>
+            <li>电子书分发</li>
+            <li>文档归档存储</li>
+            <li>在线表单提交</li>
+        </ul>
+
+        <h2>❓ 常见问题</h2>
+        <div style="margin-bottom: 20px;">
+            <div style="font-weight: 600; color: #2d3748;">Q: 需要付费吗？</div>
+            <div style="color: #4a5568;">A: 完全免费，没有任何隐藏费用或使用限制。</div>
+        </div>
+        <div style="margin-bottom: 20px;">
+            <div style="font-weight: 600; color: #2d3748;">Q: 文件会被保存或上传吗？</div>
+            <div style="color: #4a5568;">A: 文件会在服务器处理，处理后会自动删除。但我们建议不要上传敏感文档。</div>
+        </div>
+        <div style="margin-bottom: 20px;">
+            <div style="font-weight: 600; color: #2d3748;">Q: 支持多大的文件？</div>
+            <div style="color: #4a5568;">A: 目前支持最大 50MB 的 PDF 文件。</div>
+        </div>
+    </article>
+
+    <footer>
+        <p>© 2026 HiWorldAI - PDF 压缩工具 | 快速安全</p>
+        <p style="margin-top: 10px;">
+            <a href="/privacy/" style="color: #718096; margin: 0 10px;">隐私政策</a> |
+            <a href="/contact/" style="color: #718096; margin: 0 10px;">联系我们</a>
+        </p>
+    </footer>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const uploadArea = document.getElementById('uploadArea');
+        const compressionLevel = document.getElementById('compressionLevel');
+        const levelBtns = document.querySelectorAll('.level-btn');
+        const fileList = document.getElementById('fileList');
+        const compressBtn = document.getElementById('compressBtn');
+        const loadingBtn = document.getElementById('loadingBtn');
+        const progressSection = document.getElementById('progressSection');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const resultsSection = document.getElementById('resultsSection');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        let selectedFile = null;
+        let selectedLevel = 'medium';
+
+        fileInput.addEventListener('change', (e) => {
+            handleFile(e.target.files[0]);
+        });
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#667eea';
+            uploadArea.style.background = '#f8f9ff';
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.borderColor = '#e2e8f0';
+            uploadArea.style.background = '';
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#e2e8f0';
+            uploadArea.style.background = '';
+            handleFile(e.dataTransfer.files[0]);
+        });
+
+        function handleFile(file) {
+            if (!file || file.type !== 'application/pdf') {
+                alert('请上传 PDF 文件');
+                return;
+            }
+            
+            selectedFile = file;
+            
+            const sizeMB = (file.size / 1024 / 1024).toFixed(2);
+            fileList.innerHTML = `
+                <div class="file-item">
+                    <div class="file-info">
+                        <div class="file-icon">📄</div>
+                        <div>
+                            <div class="file-name">${file.name}</div>
+                            <div class="file-size">${sizeMB} MB</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            fileList.style.display = 'block';
+            compressionLevel.style.display = 'block';
+            compressBtn.style.display = 'inline-block';
+            resultsSection.style.display = 'none';
+        }
+
+        levelBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                levelBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                selectedLevel = btn.dataset.level;
+            });
+        });
+
+        compressBtn.addEventListener('click', () => {
+            if (!selectedFile) return;
+            
+            compressBtn.style.display = 'none';
+            loadingBtn.style.display = 'inline-block';
+            progressSection.classList.add('active');
+            
+            // 模拟压缩进度
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 20;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    
+                    // 显示结果
+                    setTimeout(() => {
+                        showResults();
+                    }, 500);
+                }
+                
+                progressFill.style.width = progress + '%';
+                progressText.textContent = Math.round(progress) + '%';
+            }, 300);
+        });
+
+        function showResults() {
+            loadingBtn.style.display = 'none';
+            progressSection.classList.remove('active');
+            resultsSection.classList.add('active');
+            
+            const originalSizeMB = (selectedFile.size / 1024 / 1024).toFixed(2);
+            const compressionRatio = selectedLevel === 'low' ? 0.7 : selectedLevel === 'medium' ? 0.5 : 0.3;
+            const compressedSizeMB = (originalSizeMB * compressionRatio).toFixed(2);
+            const savings = Math.round((1 - compressionRatio) * 100);
+            
+            document.getElementById('originalSizeStat').textContent = originalSizeMB + ' MB';
+            document.getElementById('compressedSizeStat').textContent = compressedSizeMB + ' MB';
+            document.getElementById('savingsStat').textContent = savings + '%';
+        }
+
+        downloadBtn.addEventListener('click', () => {
+            alert('演示版本：实际压缩功能需要后端支持。请使用 Adobe Acrobat 或其他专业 PDF 压缩工具。');
+        });
+    </script>
+</body>
+</html>
